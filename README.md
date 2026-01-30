@@ -8,7 +8,7 @@
 
 ---
 
-# Python AI libraries
+# 10 Python AI libraries
 
 - 🔢 **NumPy** 👉 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
 
