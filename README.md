@@ -11,7 +11,7 @@ Agentic BI SaaS platform for natural language analytics using LangGraph, LangCha
 
 ---
 
-# Agentic-bi-natural-language-querying 
+# Agentic-bi-natural-language-querying [ Complete Live Demo Coming Soon ]
 - ## Impact Building GenBI
 
 <img width="1495" height="767" alt="image" src="https://github.com/user-attachments/assets/af89251c-800e-4b4b-8cdb-348f08819a2a" />
