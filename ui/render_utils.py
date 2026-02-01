@@ -102,7 +102,7 @@ def render_data_results(data, turn_index=0):
                     fig = px.bar(comparison_df, x='Metric', y='Value', color='Metric', 
                                text_auto='.2s', color_discrete_sequence=px.colors.qualitative.Pastel)
                     fig.update_layout(chart_theme["layout"], title="Comparison Analysis")
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, use_container_width=True, key=f"chart_comparison_{turn_index}")
                 elif len(num_cols) == 1:
                     # CASE: Truly one single value
                     val = df[num_cols[0]].iloc[0]
@@ -131,14 +131,14 @@ def render_data_results(data, turn_index=0):
                                  color_discrete_sequence=px.colors.qualitative.Prism)
                     fig.update_layout(chart_theme["layout"], title="Revenue Distribution by Region")
                     fig.update_traces(textposition='inside', textinfo='percent+label', marker=dict(line=dict(color='#1e1e1e', width=2)))
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, use_container_width=True, key=f"chart_pie_{turn_index}")
             
             elif cat_cols and num_cols:
                 fig = px.bar(df, x=cat_cols[0], y=num_cols[0], 
                            color=num_cols[0], color_continuous_scale='Blues')
                 fig.update_layout(chart_theme["layout"], title=f"Analysis: {num_cols[0].title()} by {cat_cols[0].title()}")
                 fig.update_traces(marker_line_color='rgba(0,0,0,0)', marker_line_width=0, opacity=0.9)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, use_container_width=True, key=f"chart_bar_{turn_index}")
 
             elif cat_cols and not num_cols:
                 # CASE: Only categorical data (e.g. list of Departments) -> Show Frequency Plot
@@ -152,7 +152,7 @@ def render_data_results(data, turn_index=0):
                            text_auto=True)
                 fig.update_layout(chart_theme["layout"], title=f"Frequency Distribution: {target_col.title()}")
                 fig.update_layout(showlegend=False)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, use_container_width=True, key=f"chart_freq_{turn_index}")
                 
             else:
                 st.dataframe(df, use_container_width=True)
