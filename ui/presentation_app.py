@@ -630,38 +630,32 @@ with tab1:
                     "tenant_id": "t1", "user_id": "u1", "question": q, "history": history_context
                 }, timeout=3)
             except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
-                # Fallback Logic
-                log_event("Backend Unavailable", "Switching to Simulation Mode")
-                import time
-                time.sleep(2) # Simulate processing time
+                # Fallback to Direct Agent Execution (Streamlit Cloud mode)
+                log_event("Backend Unavailable", "Running agents locally in Streamlit")
                 
-                # Generate context-aware mock data
-                mock_kpis = {"primary_val": random.uniform(50000, 150000), "primary_label": "Simulated Revenue", "growth": "12.5%", "yoy": "+8.4%"}
-                mock_chart_data = []
-                if "region" in q.lower():
-                    regions = ["North", "South", "East", "West"]
-                    mock_chart_data = [{"region": r, "revenue": random.randint(10000, 50000)} for r in regions]
-                elif "trend" in q.lower() or "growth" in q.lower():
-                    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-                    mock_chart_data = [{"month": m, "sales": random.randint(20000, 40000)} for m in months]
-                else: 
-                    products = ["Laptop X", "Phone Y", "Tablet Z", "Watch A", "Buds B"]
-                    mock_chart_data = [{"product": p, "sales": random.randint(500, 5000)} for p in products]
-
-                # Enhanced Simulation Reasoning
-                if "expense" in q.lower():
-                    reasoning = f"The AI successfully reconciled {len(mock_chart_data)} expense records. We identified significant variances in the IT and Marketing departments exceeding the 5% threshold."
-                elif "revenue" in q.lower() or "sales" in q.lower():
-                    reasoning = f"Revenue analysis across {len(mock_chart_data)} data points shows a consistent upward trend. Regional performance is led by the North sector."
-                else:
-                    reasoning = f"Data analysis complete. The agents successfully joined relevant tables and calculated the {mock_kpis.get('primary_label')} based on filtered 2024-2025 records."
-
-                response = MockResponse({
-                    "kpis": mock_kpis,
-                    "data": mock_chart_data,
-                    "sql": f"SELECT * FROM simulated_table WHERE query LIKE '%{q}%'",
-                    "reasoning": reasoning
-                })
+                try:
+                    # Import the LangGraph workflow directly
+                    import sys
+                    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+                    from app.langgraph.workflow import run_workflow
+                    
+                    # Run agents directly
+                    result = run_workflow({
+                        "tenant_id": "t1",
+                        "user_id": "u1", 
+                        "question": q,
+                        "history": history_context
+                    })
+                    
+                    response = MockResponse(result)
+                    log_event("Local Agents Success", f"Processed query: {q[:50]}...")
+                    
+                except Exception as agent_error:
+                    # If agents also fail, show error to user
+                    log_event("Agent Error", str(agent_error))
+                    st.error(f"⚠️ **Error running AI agents:** {str(agent_error)}")
+                    st.session_state.show_result = False
+                    return
 
             if response.status_code == 200:
                 data = response.json()
