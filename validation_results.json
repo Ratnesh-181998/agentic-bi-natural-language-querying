@@ -1,0 +1,66 @@
+[
+    {
+        "Question": "Compare allocated budget vs actual spend by department for all quarters of 2025.",
+        "Status": "PASS",
+        "Metric": "Allocated Budget",
+        "Value": 1029586.5526537792,
+        "Records": 8,
+        "SQL": "SELECT T1.department, T1.allocated_budget, T1.actual_spend, T1.quarter \nFROM operating_budget AS T1 \nWHERE T1.year = 2025 \nORDER BY T1.department, T1.quarter"
+    },
+    {
+        "Question": "What is the total projected revenue for each month in 2026 based on current sales?",
+        "Status": "PASS",
+        "Metric": "Total Revenue",
+        "Value": 280232.43509628566,
+        "Records": 24,
+        "SQL": "SELECT \n    STRFTIME('%Y-%m', date) AS month, \n    SUM(revenue) AS total_revenue\nFROM \n    sales\nWHERE \n    date BETWEEN '2024-01-01' AND '2025-12-31'\nGROUP BY \n    STRFTIME('%Y-%m', date)"
+    },
+    {
+        "Question": "What are the top 3 reasons for customer churn in the last year?",
+        "Status": "PASS",
+        "Metric": "Churn Count",
+        "Value": 2.0,
+        "Records": 1,
+        "SQL": "SELECT primary_reason, COUNT(customer_id) AS churn_count \nFROM churn_analysis \nWHERE churn_date BETWEEN '2024-01-01' AND '2025-12-31' \nGROUP BY primary_reason \nORDER BY churn_count DESC \nLIMIT 3"
+    },
+    {
+        "Question": "Show me the MRR (Monthly Recurring Revenue) share percentage of SaaS Pro vs Elite.",
+        "Status": "PASS",
+        "Metric": "Total Records",
+        "Value": 1.0,
+        "Records": 1,
+        "SQL": "SELECT \n    SUM(CASE WHEN plan_name = 'SaaS Pro' THEN monthly_price ELSE 0 END) AS pro_mrr,\n    SUM(CASE WHEN plan_name = 'SaaS Elite' THEN monthly_price ELSE 0 END) AS elite_mrr,\n    ROUND(SUM(CASE WHEN plan_name = 'SaaS Pro' THEN monthly_price ELSE 0 END) * 100.0 / \n    (SUM(CASE WHEN plan_name = 'SaaS Pro' THEN monthly_price ELSE 0 END) + SUM(CASE WHEN plan_name = 'SaaS Elite' THEN monthly_price ELSE 0 END)), 2) AS pro_mrr_share,\n    ROUND(SUM(CASE WHEN plan_name = 'SaaS Elite' THEN monthly_price ELSE 0 END) * 100.0 / \n    (SUM(CASE WHEN plan_name = 'SaaS Pro' THEN monthly_price ELSE 0 END) + SUM(CASE WHEN plan_name = 'SaaS Elite' THEN monthly_price ELSE 0 END)), 2) AS elite_mrr_share\nFROM \n    subscriptions\nWHERE \n    plan_name IN ('SaaS Pro', 'SaaS Elite')\n    AND expiry_date > DATE('now')"
+    },
+    {
+        "Question": "Show me the correlation between website sessions and marketing conversions for 2024.",
+        "Status": "PASS",
+        "Metric": "Sessions",
+        "Value": 60963.0,
+        "Records": 22,
+        "SQL": "SELECT wt.date, wt.sessions, m.conversions \nFROM website_traffic wt \nJOIN marketing m ON wt.date = m.date \nWHERE wt.date BETWEEN '2024-01-01' AND '2024-12-31'"
+    },
+    {
+        "Question": "Compare our SaaS Pro price against the average competitor market price.",
+        "Status": "PASS_NO_DATA",
+        "Metric": "Primary Metric",
+        "Value": 0.0,
+        "Records": 0,
+        "SQL": "SELECT T1.monthly_price, T2.market_price \nFROM subscriptions AS T1 \nINNER JOIN competitor_metrics AS T2 \nON T1.plan_name = 'SaaS Pro' \nAND T2.product_name = 'SaaS Pro' \nWHERE T2.year BETWEEN '2024' AND '2025' \nAND T2.region = (SELECT region FROM regions WHERE name = 'Our Region')"
+    },
+    {
+        "Question": "Show me the average resolution time for High Priority tickets by support agent.",
+        "Status": "PASS",
+        "Metric": "Average Resolution Time",
+        "Value": 714.6476190476191,
+        "Records": 3,
+        "SQL": "SELECT agent_name, AVG(julianday(resolved_date) - julianday(created_date)) AS average_resolution_time \nFROM support_tickets \nWHERE priority = 'High' \nGROUP BY agent_name"
+    },
+    {
+        "Question": "Rank our top 5 Sales Reps by their Actual Sales vs Quota performance.",
+        "Status": "PASS",
+        "Metric": "Actual Sales",
+        "Value": 195080.91527927833,
+        "Records": 5,
+        "SQL": "SELECT emp_id, name, role, quota, actual_sales, \n       CAST(actual_sales AS REAL) / quota AS sales_performance\nFROM employee_performance\nWHERE role = 'Sales Rep'\nORDER BY sales_performance DESC\nLIMIT 5"
+    }
+]

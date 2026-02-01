@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+streamlit
+pandas
+plotly
+sqlalchemy
+langgraph
+langchain-groq
+langchain-huggingface
+mem0ai
+apscheduler
+python-dotenv
+requests

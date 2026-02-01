@@ -1,0 +1,32 @@
+
+**Finance & Strategy:**
+1. Chart: 'Budget vs Actual '25' -> "Compare allocated budget vs actual spend by department for all quarters of 2025."
+2. Chart: 'High Expense Depts' -> "Which departments have the highest total expenses across 2024 and 2025?"
+3. Chart: '2026 Revenue Project' -> "What is the total projected revenue for each month in 2026 based on current sales?"
+4. Chart: 'Variance Analysis' -> "Show me departments where actual spend exceeded the budget by more than 10%."
+5. Chart: 'OpEx Breakdown' -> "Break down total operating expenses by category for the last 12 months."
+6. Chart: 'ROI per Region' -> "Calculate regional ROI by comparing marketing spend vs sales revenue for each region."
+
+**CRM & Retention:**
+1. Chart: 'Churn Reasons' -> "What are the top 3 reasons for customer churn in the last year?"
+2. Chart: 'Subscription Health' -> "Show me the count of active vs canceled subscriptions across all plans."
+3. Chart: 'Top Loyalty Tiers' -> "Which loyalty tier (Gold/Silver/Bronze) has the highest total lifetime spend?"
+4. Chart: 'Signup Trends' -> "Show a monthly trend of new customer signups from 2023 to 2025."
+5. Chart: 'Acquisition ROI' -> "Compare the total spend of customers acquired through Google Ads vs Referrals."
+6. Chart: 'Plan Revenue Mix' -> "Show me the MRR (Monthly Recurring Revenue) share percentage of SaaS Pro vs Elite."
+
+**Growth & Marketing:**
+1. Chart: 'Traffic vs Leads' -> "Show me the correlation between website sessions and marketing conversions for 2024."
+2. Chart: 'Competitor Price Gap' -> "Compare our SaaS Pro price against the average competitor market price."
+3. Chart: 'Best Campaign ROI' -> "Identify the marketing campaign with the single highest ROI ever recorded."
+4. Chart: 'Mobile vs Desktop' -> "Compare the conversion rates of Mobile traffic vs Desktop traffic."
+5. Chart: 'Channel Efficiency' -> "Which marketing channel (FB, GAds, LI) has the lowest cost-per-conversion?"
+6. Chart: 'Review Sentiments' -> "Analyze the impact of product reviews on regional sales growth."
+
+**Operations & Support:**
+1. Chart: 'Support SLA Health' -> "Show me the average resolution time for High Priority tickets by support agent."
+2. Chart: 'Low Stock Alerts' -> "List all products where the current quantity on hand is below the reorder point."
+3. Chart: 'Top Sales Reps' -> "Rank our top 5 Sales Reps by their Actual Sales vs Quota performance."
+4. Chart: 'Expense Audit' -> "Identify all non-tax-deductible expenses greater than $5000 in the IT department."
+5. Chart: 'Warehouse Load' -> "Show the distribution of inventory quantity across all warehouse locations."
+6. Chart: 'Cust Satisfaction' -> "Calculate the average customer satisfaction score for bug-related tickets."

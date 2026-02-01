@@ -1,0 +1,36 @@
+{
+  "kpis": {
+    "primary_val": 75282225.0,
+    "primary_label": "Total Sales Revenue",
+    "growth": "12.5%",
+    "yoy": "8.2%"
+  },
+  "data": [
+    {
+      "region": "East",
+      "total_marketing_spend": 17378890.7851198,
+      "total_sales_revenue": 19003800.0,
+      "regional_roi": 1.093499017570873
+    },
+    {
+      "region": "North",
+      "total_marketing_spend": 22282036.27723854,
+      "total_sales_revenue": 24086225.0,
+      "regional_roi": 1.0809705495634825
+    },
+    {
+      "region": "South",
+      "total_marketing_spend": 13945088.317180337,
+      "total_sales_revenue": 14129350.0,
+      "regional_roi": 1.0132133751058896
+    },
+    {
+      "region": "West",
+      "total_marketing_spend": 16586408.080622783,
+      "total_sales_revenue": 18062850.0,
+      "regional_roi": 1.0890151690589407
+    }
+  ],
+  "sql": "SELECT \n  r.name AS region,\n  SUM(m.spend) AS total_marketing_spend,\n  SUM(s.revenue) AS total_sales_revenue,\n  SUM(s.revenue) / SUM(m.spend) AS regional_roi\nFROM \n  marketing m\nJOIN \n  regions r ON m.region = r.name\nJOIN \n  sales s ON m.region = s.region\nWHERE \n  m.date BETWEEN '2024-01-01' AND '2025-12-31'\n  AND s.date BETWEEN '2024-01-01' AND '2025-12-31'\nGROUP BY \n  r.name",
+  "reasoning": "Analyzed 4 records across ['sales', 'marketing', 'regions'] tables to determine Total Sales Revenue."
+}
