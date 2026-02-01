@@ -18,7 +18,29 @@
 
 ---
 
-## � **Overview**
+## 📑 **Table of Contents**
+- [📍 Live Demo](#-live-demo)
+- [📖 Overview](#-overview)
+- [🖼️ System Architecture](#-system-architecture)
+- [🛠️ Tech Stack](#-tech-stack--libraries)
+- [🚀 Key Features](#-key-features)
+- [🖥️ UI Walkthrough](#-ui-walkthrough-application-tabs)
+- [⚙️ Installation](#-installation--setup)
+- [☁️ Deployment](#-deployment-guide)
+- [📄 License](#-license)
+- [📞 Contact](#-contact--support)
+
+---
+
+## 📍 **Live Demo**
+
+🌟 **Try the Live Application Here:** [**Agentic BI SaaS Platform**](https://agentic-bi-natural-language-querying-xav6gvp2wxnpnn7q9caarf.streamlit.app/)
+
+> **Note:** The live demo is hosted on Streamlit Cloud. It provides a full read-only experience of the platform, allowing you to ask queries and visualize data instantly.
+
+---
+
+## 📖 **Overview**
 
 **Agentic BI SaaS** is a next-generation Business Intelligence platform that replaces static dashboards with **conversational analytics**. Instead of manually filtering charts, users ask questions in plain English (e.g., *"Show me the revenue trend for the East region in Feb 2026"*), and a swarm of **AI Agents** collaborates to generate real-time SQL queries, execute them securely, and visualize the results.
 
