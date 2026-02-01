@@ -1,0 +1,36 @@
+AGENTIC BI SAAS - TECH STACK DOCUMENTATION
+===============================================
+
+1. CORE LANGUAGE  & BACKEND
+---------------------------
+- Python 3.10+: The primary programming language.
+- FastAPI: High-performance web framework for backend APIs.
+- Uvicorn: Server for FastAPI.
+
+2. FRONTEND (Presentational Layer)
+----------------------------------
+- Streamlit: Used for the interactive UI (Note: Display simplified in footer for brevity).
+  - Custom CSS/HTML for styling.
+
+3. AI, AGENTS & MEMORY
+----------------------
+- LangGraph: For Multi-Agent state machine workflows.
+- LangChain: Tooling abstractions.
+- MCP (Model Context Protocol): Standardizing AI context exchange.
+- Mem0: Long-term memory management for agents.
+- VectorDb: Storing embeddings for semantic search.
+- NLP: Advanced Natural Language Processing pipelines.
+
+4. LLM INFERENCE
+----------------
+- Groq: High-speed Llama 3 inference.
+
+5. DATA & UTILITIES
+-------------------
+- Pandas: Data manipulation.
+- Dotenv: Environment configuration.
+
+6. ARCHITECTURE STYLE
+---------------------
+- Multi-Agent System (MAS)
+- SaaS Platform
