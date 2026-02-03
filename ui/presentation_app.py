@@ -653,6 +653,7 @@ with tab1:
                     
                     # Extract response
                     response = MockResponse(result.get("response", result))
+                    log_event("Query Success", "Direct Agent Execution Completed Successfully")
                     log_event("Local Agents Success", f"Processed query: {q[:50]}...")
                     
                 except Exception as agent_error:
@@ -1739,12 +1740,13 @@ with tab6:
             ("System", f"Session initialized for {st.session_state.session_user_id}. Waiting for interactions...", "INFO")
         ]
         
-        for idx, (evt, det, lvl) in enumerate(boot_sequence):
+        # Populate in newest-first order
+        for idx, (evt, det, lvl) in enumerate(reversed(boot_sequence)):
              logs.append({
-                "Timestamp": st.session_state.session_start_time, # Using same start time for boot duration
+                "Timestamp": st.session_state.session_start_time, 
                 "Event": evt,
                 "Details": det,
-                "Level": lvl # Storing level for hypothetical usage, though we parse details mainly
+                "Level": lvl 
             })
 
     # 2. Metrics & Parsing
@@ -1845,8 +1847,9 @@ with tab6:
         if not logs:
             st.info("📭 No logs generated yet. Start interacting with the Demo tab to see the Agent Swarm in action!")
         else:
-            # Show reversed (newest top)
-            for log in reversed(logs):
+            # log_event inserts at 0, so the list 'logs' is already newest-first.
+            # Showing newest at the top.
+            for log in logs:
                 # 1. Type Filter
                 type_match = log['Event'] in selected_types
                 
