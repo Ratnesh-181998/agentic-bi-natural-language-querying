@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import plotly.express as px
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import random
 import os
 try:
@@ -87,7 +87,8 @@ st.markdown("""
 
 # Helper: Get IST Time
 def get_ist_time():
-    utc_now = datetime.utcnow()
+    # Production-grade IST converter (UTC + 5:30)
+    utc_now = datetime.now(timezone.utc)
     ist_now = utc_now + timedelta(hours=5, minutes=30)
     return ist_now.strftime("%Y-%m-%d %H:%M:%S IST")
 
@@ -1699,14 +1700,7 @@ with tab6:
     </div>
     """, unsafe_allow_html=True)
     
-    # helper for IST time
-    def get_ist_time():
-        # Assuming server is UTC or Local, we strictly format to what user asked
-        # For this demo, we assume Local is IST or we add offset if needed.
-        # Simplest consistent way:
-        now = datetime.now()
-        # If we wanted strict UTC+5:30: datetime.utcnow() + timedelta(hours=5, minutes=30)
-        return now.strftime("%Y-%m-%d %H:%M:%S IST")
+    # Session State Init for Start Time (Uses global get_ist_time)
 
     # Session State Init for Start Time
     if "session_start_time" not in st.session_state:
